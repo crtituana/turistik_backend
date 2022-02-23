@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDescriptionTable extends Migration
+class CreateGuidesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateDescriptionTable extends Migration
      */
     public function up()
     {
-        Schema::create('description', function (Blueprint $table) {
+        Schema::create('guides', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
         });
@@ -26,6 +26,6 @@ class CreateDescriptionTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('description');
+        Schema::dropIfExists('guides');
     }
 }
