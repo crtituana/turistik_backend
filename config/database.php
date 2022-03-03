@@ -63,7 +63,7 @@ return [
             ]) : [],
         ],
 
-        'pgsql' => [
+        'pgsql-turistik' => [
             'driver' => 'pgsql',
             'url' => env('DATABASE_URL'),
             'host' => env('DB_HOST', '127.0.0.1'),
@@ -74,7 +74,7 @@ return [
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,
-            'schema' => 'public',
+            'schema' => env('DB_SCHEMA_TURISTIK', 'public'),
             'sslmode' => 'prefer',
         ],
 
