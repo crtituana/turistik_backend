@@ -13,8 +13,12 @@ class CreateGuidesTable extends Migration
      */
     public function up()
     {
-        Schema::create('guides', function (Blueprint $table) {
+        Schema::connection('pgsql-turistik')->create('guides', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('ride_id')->nullable()->constrained('rides');
+            $table->string('name')->unique();
+            $table->string('last_name')->unique();
+            $table->text('experience')->comment('describir la experiencia del guia');
             $table->timestamps();
         });
     }
@@ -26,6 +30,6 @@ class CreateGuidesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('guides');
+        Schema::connection('pgsql-app')->dropIfExists('guides');
     }
 }

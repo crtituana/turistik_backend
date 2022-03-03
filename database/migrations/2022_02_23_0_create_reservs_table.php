@@ -13,8 +13,12 @@ class CreateReservsTable extends Migration
      */
     public function up()
     {
-        Schema::create('reservs', function (Blueprint $table) {
+        Schema::connection('pgsql-turistik')->create('reservs', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('person_id')->nullable()->constrained('persons');
+            $table->foreignId('ride_id')->nullable()->constrained('rides');
+            $table->foreignId('companie_id')->nullable()->constrained('companies');
+            $table->string('number_people');
             $table->timestamps();
         });
     }
@@ -26,6 +30,6 @@ class CreateReservsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('reservs');
+        Schema::connection('pgsql-app')->dropIfExists('reservs');
     }
 }

@@ -13,8 +13,10 @@ class CreateCompaniesTable extends Migration
      */
     public function up()
     {
-        Schema::create('companies', function (Blueprint $table) {
+        Schema::connection('pgsql-turistik')->create('companies', function (Blueprint $table) {
             $table->id();
+            $table->text('name')->unique();
+            $table->text('address');
             $table->timestamps();
         });
     }
@@ -26,6 +28,8 @@ class CreateCompaniesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('companies');
+        Schema::connection('pgsql-app')->dropIfExists('companies');
     }
+
 }
+

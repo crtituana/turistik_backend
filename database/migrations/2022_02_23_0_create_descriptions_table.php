@@ -13,8 +13,14 @@ class CreateDescriptionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('descriptions', function (Blueprint $table) {
+        Schema::connection('pgsql-turistik')->create('descriptions', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('potho_id')->nullable()->constrained('app.photos');
+            $table->text('equipment');
+            $table->text('height');
+            $table->text('difficulty');
+            $table->text('duration');
+            $table->text('location');
             $table->timestamps();
         });
     }
@@ -26,6 +32,6 @@ class CreateDescriptionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('descriptions');
+        Schema::connection('pgsql-app')->dropIfExists('descriptions');
     }
 }

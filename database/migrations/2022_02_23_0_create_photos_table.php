@@ -13,8 +13,10 @@ class CreatePhotosTable extends Migration
      */
     public function up()
     {
-        Schema::create('photos', function (Blueprint $table) {
+        Schema::connection('pgsql-turistik')->create('photos', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('description_id')->nullable()->constrained('descriptions');
+            $table->text('name_photo');
             $table->timestamps();
         });
     }
@@ -26,6 +28,6 @@ class CreatePhotosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('photos');
+        Schema::connection('pgsql-app')->dropIfExists('photos');
     }
 }

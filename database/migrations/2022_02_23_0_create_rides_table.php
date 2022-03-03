@@ -13,8 +13,16 @@ class CreateRidesTable extends Migration
      */
     public function up()
     {
-        Schema::create('rides', function (Blueprint $table) {
+        Schema::connection('pgsql-turistik')->create('rides', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('service_id')->nullable()->constrained('services');
+            $table->foreignId('description_id')->nullable()->constrained('descriptions');
+            $table->foreignId('reserv_id')->nullable()->constrained('reservs');
+            $table->foreignId('companie_id')->nullable()->constrained('companies');
+            $table->foreignId('guide_id')->nullable()->constrained('guides');
+            $table->timestamp('hour_ride');
+            $table->date('date_ride');
+            $table->text('meeting_point');
             $table->timestamps();
         });
     }
@@ -26,6 +34,6 @@ class CreateRidesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('rides');
+        Schema::connection('pgsql-app')->dropIfExists('rides');
     }
 }

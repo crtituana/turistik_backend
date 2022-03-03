@@ -13,8 +13,10 @@ class CreateRolesTable extends Migration
      */
     public function up()
     {
-        Schema::create('roles', function (Blueprint $table) {
+        Schema::connection('pgsql-turistik')->create('roles', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('person_id')->nullable()->constrained('persons');
+            $table->string('number_role')->unique();
             $table->timestamps();
         });
     }
@@ -26,6 +28,6 @@ class CreateRolesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('roles');
+        Schema::connection('pgsql-app')->dropIfExists('roles');
     }
 }

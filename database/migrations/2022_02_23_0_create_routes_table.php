@@ -13,8 +13,9 @@ class CreateRoutesTable extends Migration
      */
     public function up()
     {
-        Schema::create('routes', function (Blueprint $table) {
+        Schema::connection('pgsql-turistik')->create('routes', function (Blueprint $table) {
             $table->id();
+            $table->string('name_route')->unique();
             $table->timestamps();
         });
     }
@@ -26,6 +27,6 @@ class CreateRoutesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('routes');
+        Schema::connection('pgsql-app')->dropIfExists('routes');
     }
 }

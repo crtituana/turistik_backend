@@ -13,8 +13,14 @@ class CreatePersonsTable extends Migration
      */
     public function up()
     {
-        Schema::create('persons', function (Blueprint $table) {
+        Schema::connection('pgsql-turistik')->create('persons', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('role_id')->nullable()->constrained('roles');
+            $table->string('name')->unique();
+            $table->string('last_name')->unique();
+            $table->string('email')->unique();
+            $table->string('password')->unique();
+            $table->string('number_phone')->unique();
             $table->timestamps();
         });
     }
@@ -26,6 +32,6 @@ class CreatePersonsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('persons');
+        Schema::connection('pgsql-app')->dropIfExists('persons');
     }
 }
